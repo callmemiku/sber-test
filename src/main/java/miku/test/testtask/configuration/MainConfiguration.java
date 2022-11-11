@@ -1,5 +1,6 @@
 package miku.test.testtask.configuration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -30,6 +31,11 @@ public class MainConfiguration {
                 .setMaximumPoolSize(Integer.parseInt(maxPoolSize));
 
         return dataSource;
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 
 }

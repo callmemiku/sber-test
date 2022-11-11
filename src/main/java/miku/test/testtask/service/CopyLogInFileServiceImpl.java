@@ -1,45 +1,49 @@
 package miku.test.testtask.service;
 
 import lombok.extern.slf4j.Slf4j;
-import miku.test.testtask.entity.LogEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.format.DateTimeFormatter;
 
 import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 @Service
 @Slf4j
 public class CopyLogInFileServiceImpl implements CopyLogInFileService {
 
-    @Value("${logging.file.name}")
+    @Value("${file-to-save}")
     private String logfilePath;
-
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
     private Path file;
 
     @PostConstruct
     public void init() {
         file = Path.of(logfilePath);
+        File asFile = file.toFile();
+        if (!asFile.exists()) {
+            try {
+                asFile.getParentFile().mkdirs();
+                asFile.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException("Невозможно создать файл: " + e.getMessage());
+            }
+        }
     }
 
     @Override
-    public void saveLogInFile(LogEntity entity) {
-        String message = String.format("%s\t%s\t%s: %s",
-                dateFormat.format(entity.getTimestamp()),
-                entity.getLevel(), entity.getType(), entity.getMessage());
+    public void saveLogInFile(String json) {
         try {
             Files.writeString(file,
-                    message + System.lineSeparator(),
-                    APPEND);
+                    json + System.lineSeparator(),
+                    CREATE, APPEND);
         } catch (IOException e) {
-            log.error("Ошибка при записи лога в файл");
+            throw new RuntimeException("Ошибка при записи лога в файл: " + e.getMessage());
         }
     }
 }

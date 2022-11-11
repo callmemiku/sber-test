@@ -3,7 +3,7 @@
 <mapper namespace="miku.test.testtask.repository.LogMapper">
 
     <insert id="saveLog">
-        insert into logs(message, type, level, time) values (#{entity.message}, #{entity.type}, #{entity.level}, #{entity.timestamp})
+        insert into logs(message, type, level, time, json_cval) values (#{entity.message}, #{entity.type}, #{entity.level}, #{time}, #{json}::jsonb)
     </insert>
 
 </mapper>

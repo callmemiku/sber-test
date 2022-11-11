@@ -33,3 +33,8 @@ databaseChangeLog:
                   type: timestamptz
                   constraints:
                     nullable: false
+              - column:
+                  name: json_cval
+                  type: jsonb
+                  constraints:
+                    nullable: false
