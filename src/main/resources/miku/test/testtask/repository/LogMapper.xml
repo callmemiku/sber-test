@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="miku.test.testtask.repository.LogMapper">
+
+    <insert id="saveLog">
+        insert into logs(message, type, level, time) values (#{entity.message}, #{entity.type}, #{entity.level}, #{entity.timestamp})
+    </insert>
+
+</mapper>

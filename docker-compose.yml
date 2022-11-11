@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  test-task:
+    ports:
+      - '80:80'
+    expose:
+      - '80'
+    depends_on:
+      - test-task-db
+    build:
+      context: .
+    restart: always
+  test-task-db:
+    container_name: test-task-db
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5433:5432'
+    expose:
+      - '5432'
+    volumes:
+      - test-task-db:/var/lib/psql
+# Names our volume
+volumes:
+  test-task-db:

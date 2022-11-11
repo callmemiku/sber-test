@@ -1,0 +1,29 @@
+server:
+  port: 80
+  servlet:
+    context-path: /core-api
+
+logging:
+  file:
+    name: logs/logfile.log
+
+file-to-save: res/file.txt
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:postgresql://test-task-db:5432/postgres
+    password: postgres
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+  application:
+    name: logger
+
+management:
+  endpoint:
+    health:
+      show-details: always
