@@ -2,6 +2,7 @@ version: '3.1'
 
 services:
   test-task:
+    container_name: test-task
     ports:
       - '80:80'
     expose:
