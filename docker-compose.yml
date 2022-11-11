@@ -11,6 +11,8 @@ services:
     build:
       context: .
     restart: always
+    networks:
+      - test-nw
   test-task-db:
     container_name: test-task-db
     image: postgres
@@ -24,6 +26,12 @@ services:
       - '5432'
     volumes:
       - test-task-db:/var/lib/psql
+    networks:
+      - test-nw
 # Names our volume
 volumes:
   test-task-db:
+networks:
+  test-nw:
+    external: false
+    name: test-nw
