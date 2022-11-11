@@ -27,7 +27,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: 'health,env'
   endpoint:
     health:
       show-details: always
