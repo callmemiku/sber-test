@@ -10,7 +10,7 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://test-task-db:5432/postgres
     password: postgres
     username: postgres
     driver-class-name: org.postgresql.Driver
