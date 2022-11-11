@@ -12,7 +12,7 @@
         "message": "test",
         "type": "APPLICATION",
         "level": "INFO",
-        "timestamp": 2668034685000
+        "time": 2668034685000
     }'
 
 Хелсчек:
